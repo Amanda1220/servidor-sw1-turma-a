@@ -1,0 +1,22 @@
+import express from 'express'
+import pool from './db';
+
+const app = express();
+const port = 3000;
+
+(async () => {
+  try {
+    const [rows] = await pool.query('SELECT NOW() AS now');
+    console.log('DB conectado, resultado:', rows);
+  } catch (err) {
+    console.error('Erro ao conectar no banco:', err);
+  }
+})();
+
+app.get("/", (req, res) => {
+    res.send("Servidor Iniciado");
+})
+
+app.listen(port, () => {
+    console.log("servidor rodando em http://localhost:" + port);
+})
