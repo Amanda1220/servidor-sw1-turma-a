@@ -1,5 +1,6 @@
 import express from 'express'
 import pool from './db';
+import userRoutes from './modules/User/userRoutes';
 
 const app = express();
 const port = 3000;
@@ -12,6 +13,8 @@ const port = 3000;
     console.error('Erro ao conectar no banco:', err);
   }
 })();
+
+userRoutes(app);
 
 app.get("/", (req, res) => {
     res.send("Servidor Iniciado");
