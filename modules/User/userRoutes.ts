@@ -1,5 +1,6 @@
 import express from 'express';
 import { IUser } from '../../interfaces/IUser';
+import createUser from './createUser';
 
 function userRoutes(app: express.Application) {
 
@@ -14,7 +15,8 @@ function userRoutes(app: express.Application) {
             res.send(resultado.error.flatten());
         }
         else{
-
+            const user = resultado.data as IUser;
+            res.send(createUser(user));
         }
     })
 
